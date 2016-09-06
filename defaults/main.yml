@@ -1,0 +1,64 @@
+---
+php_packages:
+  - php
+  - php-cli
+  - php-common
+  - php-devel
+  - php-fpm
+  - php-gd
+  - php-imap
+  - php-ldap
+  - php-mbstring
+  - php-mysqlnd
+  - php-mcrypt
+  - php-opcache
+  - php-pdo
+  - php-pear
+  - php-pecl-apcu
+  - php-xml
+  - php-xmlrpc
+
+php_enablerepo: "remi,epel,remi-php70"
+
+# -----------------------------------------------------------------------------
+# php.ini
+# -----------------------------------------------------------------------------
+# Language options
+php_short_open_tag: 'Off'
+php_output_buffering: 4096
+
+# Miscellaneous
+php_expose_php: "On"
+
+# Resource limits
+php_max_execution_time: 60
+php_max_input_time: 60
+php_max_input_vars: 1000
+php_memory_limit: "256M"
+
+# Error handling and logging
+php_error_reporting: "E_ALL & ~E_DEPRECATED & ~E_STRICT"
+php_display_errors: "Off"
+php_display_startup_errors: "Off"
+
+# Data handling
+php_post_max_size: "32M"
+
+# Paths and directories
+php_realpath_cache_size: "32K"
+
+# File uploads
+php_upload_max_filesize: "64M"
+
+# Fopen wrappers
+php_allow_url_fopen: "On"
+
+# Module settings
+php_date_timezone: "Asia/Tokyo"
+php_sendmail_path: "/usr/sbin/sendmail -t -i"
+php_session_save_handler: files
+php_session_save_path: '/var/lib/php/session'
+php_session_cookie_lifetime: 0
+php_session_gc_probability: 1
+php_session_gc_divisor: 1000
+php_session_gc_maxlifetime: 1440

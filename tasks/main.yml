@@ -1,0 +1,41 @@
+---
+# install
+- name: Ensure PHP packages are installed.
+  yum:
+    name: "{{ item }}"
+    state: latest
+    enablerepo: "{{ php_enablerepo }}"
+  with_items: "{{ php_packages }}"
+  notify: restart php-fpm
+
+# configure
+- name: Ensure configuration directories exist.
+  file:
+    path: "{{ item }}"
+    state: directory
+    follow: true
+  with_flattened:
+    - /etc
+    - /etc/php.d
+
+# php
+- name: Place PHP configuration file in place.
+  template:
+    src: php.ini.j2
+    dest: /etc/php.ini
+    owner: root
+    group: root
+    mode: 00644
+  notify: restart php-fpm
+
+# apcu
+
+
+
+
+# service
+- name: Ensure php-fpm is started and enabled to start at boot.
+  service:
+    name: php-fpm
+    state: started
+    enabled: yes
