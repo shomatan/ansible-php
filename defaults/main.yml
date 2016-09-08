@@ -22,6 +22,7 @@ php_enablerepo: "remi,epel,remi-php70"
 
 php_extension_conf_path: "/etc/php.d"
 php_apcu_conf_filename: "40-apcu.ini"
+php_opcache_conf_filename: "10-opcache.ini"
 
 # -----------------------------------------------------------------------------
 # php.ini
@@ -69,5 +70,19 @@ php_session_gc_maxlifetime: 1440
 # -----------------------------------------------------------------------------
 # 40-apcu.ini
 # -----------------------------------------------------------------------------
-php_apc_enable_cli: 1
+php_apc_enable_cli: 0
 php_apc_shm_size: "64M"
+
+# -----------------------------------------------------------------------------
+# 10-opcache.ini
+# -----------------------------------------------------------------------------
+php_opcache_enable_cli: 0
+php_opcache_memory_consumption: 128
+php_opcache_interned_strings_buffer: 16
+php_opcache_max_accelerated_files: 4096
+php_opcache_max_wasted_percentage: 5
+php_opcache_validate_timestamps: 1
+php_opcache_revalidate_path: 0
+php_opcache_revalidate_freq: 2
+php_opcache_max_file_size: 0
+php_opcache_blacklist_filename: "/etc/php.d/opcache*.blacklist"

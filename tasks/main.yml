@@ -39,6 +39,17 @@
     mode: 00644
   notify: restart php-fpm
 
+# opcache
+- name: Ensure OpCache config file is present.
+  template:
+    src: opcache.ini.j2
+    dest: "{{ php_extension_conf_path }}/{{ php_opcache_conf_filename }}"
+    owner: root
+    group: root
+    force: yes
+    mode: 00644
+  notify: restart php-fpm
+
 #- debug: var=result
 
 # service
