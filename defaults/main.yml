@@ -20,6 +20,9 @@ php_packages:
 
 php_enablerepo: "remi,epel,remi-php70"
 
+php_extension_conf_path: "/etc/php.d"
+php_apcu_conf_filename: "40-apcu.ini"
+
 # -----------------------------------------------------------------------------
 # php.ini
 # -----------------------------------------------------------------------------
@@ -62,3 +65,9 @@ php_session_cookie_lifetime: 0
 php_session_gc_probability: 1
 php_session_gc_divisor: 1000
 php_session_gc_maxlifetime: 1440
+
+# -----------------------------------------------------------------------------
+# 40-apcu.ini
+# -----------------------------------------------------------------------------
+php_apc_enable_cli: 1
+php_apc_shm_size: "64M"

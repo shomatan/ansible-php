@@ -29,13 +29,18 @@
   notify: restart php-fpm
 
 # apcu
+- name: Ensure APCu config file is present.
+  template:
+    src: apcu.ini.j2
+    dest: "{{ php_extension_conf_path }}/{{ php_apcu_conf_filename }}"
+    owner: root
+    group: root
+    force: yes
+    mode: 00644
+  notify: restart php-fpm
 
-
-
+#- debug: var=result
 
 # service
 - name: Ensure php-fpm is started and enabled to start at boot.
-  service:
-    name: php-fpm
-    state: started
-    enabled: yes
+  service: name=php-fpm state=started enabled=yes
