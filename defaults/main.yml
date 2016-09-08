@@ -24,6 +24,9 @@ php_extension_conf_path: "/etc/php.d"
 php_apcu_conf_filename: "40-apcu.ini"
 php_opcache_conf_filename: "10-opcache.ini"
 
+php_fpm_conf_path: "/etc/fpm"
+php_fpm_pool_conf_path: "/etc/php-fpm.d/www.conf"
+
 # -----------------------------------------------------------------------------
 # php.ini
 # -----------------------------------------------------------------------------
@@ -66,6 +69,21 @@ php_session_cookie_lifetime: 0
 php_session_gc_probability: 1
 php_session_gc_divisor: 1000
 php_session_gc_maxlifetime: 1440
+
+# -----------------------------------------------------------------------------
+# www.conf
+# -----------------------------------------------------------------------------
+php_fpm_pool_user: nginx
+php_fpm_pool_group: nginx
+php_fpm_listen: "127.0.0.1:9000"
+php_fpm_listen_allowed_clients: "127.0.0.1"
+php_fpm_listen_mode: "0660"
+php_fpm_pm: "dynamic"
+php_fpm_pm_max_children: 50
+php_fpm_pm_start_servers: 5
+php_fpm_pm_min_spare_servers: 5
+php_fpm_pm_max_spare_servers: 5
+php_fpm_pm_max_requests: 500
 
 # -----------------------------------------------------------------------------
 # 40-apcu.ini

@@ -18,6 +18,12 @@
     - /etc
     - /etc/php.d
 
+- name: Create nginx group.
+  group: name=nginx
+
+- name: Create nginx user.
+  user: name=nginx group=nginx createhome=no shell=/sbin/nologin
+
 # php
 - name: Place PHP configuration file in place.
   template:
@@ -44,6 +50,17 @@
   template:
     src: opcache.ini.j2
     dest: "{{ php_extension_conf_path }}/{{ php_opcache_conf_filename }}"
+    owner: root
+    group: root
+    force: yes
+    mode: 00644
+  notify: restart php-fpm
+
+# php-fpm
+- name: Ensure the default pool exists.
+  template:
+    src: www.conf.j2
+    dest: "{{ php_fpm_pool_conf_path }}"
     owner: root
     group: root
     force: yes
