@@ -75,7 +75,7 @@ php_session_gc_maxlifetime: 1440
 # -----------------------------------------------------------------------------
 php_fpm_pool_user: nginx
 php_fpm_pool_group: nginx
-php_fpm_listen: "127.0.0.1:9000"
+php_fpm_listen: /var/run/php-fpm/php-fpm.sock
 php_fpm_listen_allowed_clients: "127.0.0.1"
 php_fpm_listen_mode: "0660"
 php_fpm_pm: "dynamic"
