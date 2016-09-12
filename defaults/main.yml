@@ -19,7 +19,7 @@ php_packages:
   - php-xmlrpc
 
 php_enablerepo: "remi,epel,remi-php70"
-
+php_execute_filename: /usr/bin/php
 php_extension_conf_path: "/etc/php.d"
 php_apcu_conf_filename: "40-apcu.ini"
 php_opcache_conf_filename: "10-opcache.ini"
