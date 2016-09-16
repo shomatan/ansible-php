@@ -18,11 +18,11 @@
     - /etc
     - /etc/php.d
 
-- name: Create nginx group.
-  group: name=nginx
+- name: Create {{ php_fpm_pool_group }} group.
+  group: name="{{ php_fpm_pool_group }}"
 
-- name: Create nginx user.
-  user: name=nginx group=nginx createhome=no shell=/sbin/nologin
+- name: Create {{ php_fpm_pool_user }} user.
+  user: name="{{ php_fpm_pool_user }}" group="{{ php_fpm_pool_group }}" createhome=no shell=/sbin/nologin
 
 # php
 - name: Place PHP configuration file in place.
