@@ -15,10 +15,11 @@ php_packages:
   - php-pdo
   - php-pear
   - php-pecl-apcu
+  - php-pecl-mysql
   - php-xml
   - php-xmlrpc
 
-php_enablerepo: "remi,epel,remi-php70"
+php_enablerepo: "epel,remi,remi-php70"
 php_execute_filename: /usr/bin/php
 php_extension_conf_path: "/etc/php.d"
 php_apcu_conf_filename: "40-apcu.ini"
