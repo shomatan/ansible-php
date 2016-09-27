@@ -67,7 +67,13 @@
     mode: 00644
   notify: restart php-fpm
 
-#- debug: var=result
+- name: Ensure session directory permission.
+  file:
+    path: /var/lib/php/session
+    state: directory
+    owner: "{{ php_fpm_pool_user }}"
+    group: "{{ php_fpm_pool_group }}"
+    recurse: true
 
 # service
 - name: Ensure php-fpm is started and enabled to start at boot.
