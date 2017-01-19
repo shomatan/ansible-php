@@ -1,4 +1,5 @@
 ---
+php_version: 7.1
 php_packages:
   - php
   - php-cli
@@ -19,7 +20,7 @@ php_packages:
   - php-xml
   - php-xmlrpc
 
-php_enablerepo: "epel,remi,remi-php70"
+php_enablerepo: "epel,remi,remi-php{{ php_version | replace('.', '') }}"
 php_execute_filename: /usr/bin/php
 php_extension_conf_path: "/etc/php.d"
 php_apcu_conf_filename: "40-apcu.ini"
