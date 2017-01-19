@@ -1,80 +1,47 @@
 ---
 # install
 - name: Ensure PHP packages are installed.
-  yum:
-    name: "{{ item }}"
-    state: latest
-    enablerepo: "{{ php_enablerepo }}"
+  yum: name={{ item }} state=latest enablerepo={{ php_enablerepo }}
   with_items: "{{ php_packages }}"
   notify: restart php-fpm
 
 # configure
 - name: Ensure configuration directories exist.
-  file:
-    path: "{{ item }}"
-    state: directory
-    follow: true
+  file: path={{ item }} state=directory follow=true
   with_flattened:
     - /etc
     - /etc/php.d
 
 - name: Create {{ php_fpm_pool_group }} group.
-  group: name="{{ php_fpm_pool_group }}"
+  group: name={{ php_fpm_pool_group }}
 
 - name: Create {{ php_fpm_pool_user }} user.
-  user: name="{{ php_fpm_pool_user }}" group="{{ php_fpm_pool_group }}" createhome=no shell=/sbin/nologin
+  user: name={{ php_fpm_pool_user }} group={{ php_fpm_pool_group }} createhome=no shell=/sbin/nologin
 
 # php
 - name: Place PHP configuration file in place.
-  template:
-    src: php.ini.j2
-    dest: /etc/php.ini
-    owner: root
-    group: root
-    mode: 00644
+  template: src=php.ini.j2 dest=/etc/php.ini
   notify: restart php-fpm
 
 # apcu
 - name: Ensure APCu config file is present.
-  template:
-    src: apcu.ini.j2
-    dest: "{{ php_extension_conf_path }}/{{ php_apcu_conf_filename }}"
-    owner: root
-    group: root
-    force: yes
-    mode: 00644
+  template: src=apcu.ini.j2 dest={{ php_extension_conf_path }}/{{ php_apcu_conf_filename }} force=yes
   notify: restart php-fpm
 
 # opcache
 - name: Ensure OpCache config file is present.
-  template:
-    src: opcache.ini.j2
-    dest: "{{ php_extension_conf_path }}/{{ php_opcache_conf_filename }}"
-    owner: root
-    group: root
-    force: yes
-    mode: 00644
+  template: src=opcache.ini.j2 dest={{ php_extension_conf_path }}/{{ php_opcache_conf_filename }} force=yes
   notify: restart php-fpm
 
 # php-fpm
 - name: Ensure the default pool exists.
-  template:
-    src: www.conf.j2
-    dest: "{{ php_fpm_pool_conf_path }}"
-    owner: root
-    group: root
-    force: yes
-    mode: 00644
+  template: src=www.conf.j2 dest={{ php_fpm_pool_conf_path }} force=yes
   notify: restart php-fpm
 
 - name: Ensure session directory permission.
-  file:
-    path: /var/lib/php/session
-    state: directory
-    owner: "{{ php_fpm_pool_user }}"
-    group: "{{ php_fpm_pool_group }}"
-    recurse: true
-
+  file: path=/var/lib/php/session state=directory recurse=true
+  become_user: "{{ php_fpm_pool_user }}"
+    
 # service
 - name: Ensure php-fpm is started and enabled to start at boot.
   service: name=php-fpm state=started enabled=yes
