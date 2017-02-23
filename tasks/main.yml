@@ -39,9 +39,13 @@
   notify: restart php-fpm
 
 - name: Ensure session directory permission.
-  file: path=/var/lib/php/session state=directory recurse=true
-  become_user: "{{ php_fpm_pool_user }}"
-    
+  file:
+    path: /var/lib/php/session
+    owner: "{{ php_fpm_pool_user }}"
+    group: "{{ php_fpm_pool_user }}"
+    state: directory
+    recurse: true
+
 # service
 - name: Ensure php-fpm is started and enabled to start at boot.
   service: name=php-fpm state=started enabled=yes
