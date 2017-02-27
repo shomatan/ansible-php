@@ -90,13 +90,13 @@ php_fpm_pm_max_requests: 500
 # -----------------------------------------------------------------------------
 # 40-apcu.ini
 # -----------------------------------------------------------------------------
-php_apc_enable_cli: 0
-php_apc_shm_size: "64M"
+php_apc_enable_cli: 1
+php_apc_shm_size: 64M
 
 # -----------------------------------------------------------------------------
 # 10-opcache.ini
 # -----------------------------------------------------------------------------
-php_opcache_enable_cli: 0
+php_opcache_enable_cli: 1
 php_opcache_memory_consumption: 128
 php_opcache_interned_strings_buffer: 16
 php_opcache_max_accelerated_files: 4096
