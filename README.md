@@ -1,6 +1,8 @@
 Ansible role: PHP-FPM
 =========
 
+[![Build Status](https://travis-ci.org/shomatan/ansible-nginx.svg?branch=master)](https://travis-ci.org/shomatan/ansible-php-fpm)
+
 Installs and configures PHP FastCGI Process Manager.
 
 Requirements
