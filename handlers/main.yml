@@ -3,3 +3,4 @@
   service:
     name: php-fpm
     state: restarted
+  when: ansible_connection != 'docker'
