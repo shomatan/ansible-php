@@ -12,30 +12,46 @@
     - /etc
     - /etc/php.d
 
-- name: Create {{ php_fpm_pool_group }} group.
-  group: name={{ php_fpm_pool_group }}
+- name: Create php-fpm pool group.
+  group:
+    name: "{{ php_fpm_pool_group }}"
 
-- name: Create {{ php_fpm_pool_user }} user.
-  user: name={{ php_fpm_pool_user }} group={{ php_fpm_pool_group }} createhome=no shell=/sbin/nologin
+- name: Create php-fpm pool user.
+  user:
+    name: "{{ php_fpm_pool_user }}"
+    group: "{{ php_fpm_pool_group }}"
+    createhome: no
+    shell: /sbin/nologin
 
 # php
 - name: Place PHP configuration file in place.
-  template: src=php.ini.j2 dest=/etc/php.ini
+  template:
+    src: php.ini.j2
+    dest: /etc/php.ini
   notify: restart php-fpm
 
 # apcu
 - name: Ensure APCu config file is present.
-  template: src=apcu.ini.j2 dest={{ php_extension_conf_path }}/{{ php_apcu_conf_filename }} force=yes
+  template:
+    src: apcu.ini.j2
+    dest: "{{ php_extension_conf_path }}/{{ php_apcu_conf_filename }}"
+    force: yes
   notify: restart php-fpm
 
 # opcache
 - name: Ensure OpCache config file is present.
-  template: src=opcache.ini.j2 dest={{ php_extension_conf_path }}/{{ php_opcache_conf_filename }} force=yes
+  template:
+    src: opcache.ini.j2
+    dest: "{{ php_extension_conf_path }}/{{ php_opcache_conf_filename }}"
+    force: yes
   notify: restart php-fpm
 
 # php-fpm
 - name: Ensure the default pool exists.
-  template: src=www.conf.j2 dest={{ php_fpm_pool_conf_path }} force=yes
+  template:
+    src: www.conf.j2
+    dest: "{{ php_fpm_pool_conf_path }}"
+    force: yes
   notify: restart php-fpm
 
 - name: Ensure session directory permission.
