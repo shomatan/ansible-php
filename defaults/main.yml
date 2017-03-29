@@ -7,8 +7,6 @@ php_packages:
   - php-devel
   - php-fpm
   - php-gd
-  - php-imap
-  - php-ldap
   - php-mbstring
   - php-mysqlnd
   - php-mcrypt
@@ -17,6 +15,7 @@ php_packages:
   - php-pear
   - php-pecl-apcu
   - php-pecl-mysql
+  - php-pecl-zip
   - php-xml
   - php-xmlrpc
 
