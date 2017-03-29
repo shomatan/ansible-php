@@ -38,7 +38,7 @@ apc.shm_size={{ php_apc_shm_size }}
 
 ;      	A "hint" about the number variables expected in the cache.
 ;      	Set to zero or omit if you are not sure;
-;apc.entries_hint=4096
+apc.entries_hint={{ php_apc_entries_hint }}
 
 ;      	The mktemp-style file_mask to pass to the mmap module
 apc.mmap_file_mask=/tmp/apc.XXXXXX
