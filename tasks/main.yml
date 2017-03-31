@@ -1,7 +1,10 @@
 ---
 # install
 - name: Ensure PHP packages are installed.
-  yum: name={{ item }} state=latest enablerepo={{ php_enablerepo }}
+  yum:
+    name: "{{ item }}"
+    enablerepo: "{{ php_enablerepo }}"
+    state: latest
   with_items: "{{ php_packages }}"
   notify: restart php-fpm
 
@@ -12,10 +15,13 @@
     mode: 0775
     validate_certs: no
   when: ansible_connection == 'docker'
-  
+
 # configure
 - name: Ensure configuration directories exist.
-  file: path={{ item }} state=directory follow=true
+  file:
+    path: "{{ item }}"
+    follow: true
+    state: directory
   with_flattened:
     - /etc
     - /etc/php.d
