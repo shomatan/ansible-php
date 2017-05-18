@@ -79,6 +79,7 @@ php_fpm_pool_group: nginx
 php_fpm_listen: /var/run/php-fpm/php-fpm.sock
 php_fpm_listen_allowed_clients: ""
 php_fpm_listen_mode: "0660"
+php_fpm_error_log: /var/log/php-fpm/www-error.log
 php_fpm_pm: "dynamic"
 php_fpm_pm_max_children: 50
 php_fpm_pm_start_servers: 5
