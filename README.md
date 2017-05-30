@@ -12,14 +12,20 @@ None.
 
 Role Variables
 --------------
-
-...
+See `defaults/main.yml`
 
 Dependencies
 ------------
 
 + shomatan.repo-epel
 + shomatan.repo-remi
+
+Role Tags
+---------
+
+- php-fpm-install
+- php-fpm-config
+- php-fpm-service
 
 Example Playbook
 ----------------

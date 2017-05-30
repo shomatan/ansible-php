@@ -7,6 +7,8 @@
     state: latest
   with_items: "{{ php_packages }}"
   notify: restart php-fpm
+  tags:
+    - php-fpm-install
 
 # configure
 - name: Ensure configuration directories exist.
@@ -17,10 +19,14 @@
   with_flattened:
     - /etc
     - /etc/php.d
+  tags:
+    - php-fpm-config
 
 - name: Create php-fpm pool group.
   group:
     name: "{{ php_fpm_pool_group }}"
+  tags:
+    - php-fpm-config
 
 - name: Create php-fpm pool user.
   user:
@@ -28,6 +34,8 @@
     group: "{{ php_fpm_pool_group }}"
     createhome: no
     shell: /sbin/nologin
+  tags:
+    - php-fpm-config
 
 # php
 - name: Place PHP configuration file in place.
@@ -35,6 +43,8 @@
     src: php.ini.j2
     dest: /etc/php.ini
   notify: restart php-fpm
+  tags:
+    - php-fpm-config
 
 # apcu
 - name: Ensure APCu config file is present.
@@ -43,6 +53,8 @@
     dest: "{{ php_extension_conf_path }}/{{ php_apcu_conf_filename }}"
     force: yes
   notify: restart php-fpm
+  tags:
+    - php-fpm-config
 
 # opcache
 - name: Ensure OpCache config file is present.
@@ -51,6 +63,8 @@
     dest: "{{ php_extension_conf_path }}/{{ php_opcache_conf_filename }}"
     force: yes
   notify: restart php-fpm
+  tags:
+    - php-fpm-config
 
 # php-fpm
 - name: Ensure the default pool exists.
@@ -59,6 +73,8 @@
     dest: "{{ php_fpm_pool_conf_path }}"
     force: yes
   notify: restart php-fpm
+  tags:
+    - php-fpm-config
 
 - name: Ensure session directory permission.
   file:
@@ -67,8 +83,12 @@
     group: "{{ php_fpm_pool_user }}"
     state: directory
     recurse: true
+  tags:
+    - php-fpm-config
 
 # service
 - name: Ensure php-fpm is started and enabled to start at boot.
   service: name=php-fpm state=started enabled=yes
   when: ansible_connection != 'docker'
+  tags:
+    - php-fpm-service
