@@ -2,6 +2,7 @@
 
 [global]	
 error_log = {{ php_fpm_error_log }}
+daemonize = {{ php_fpm_daemonize }}
 
 ; Start a new pool named 'www'.
 ; the variable $pool can we used in any directive and will be replaced by the

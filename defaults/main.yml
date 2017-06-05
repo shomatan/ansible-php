@@ -74,6 +74,7 @@ php_session_gc_maxlifetime: 1440
 # -----------------------------------------------------------------------------
 # www.conf
 # -----------------------------------------------------------------------------
+php_fpm_daemonize: "yes"
 php_fpm_pool_user: nginx
 php_fpm_pool_group: nginx
 php_fpm_listen: /var/run/php-fpm/php-fpm.sock
