@@ -86,6 +86,7 @@ php_fpm_pm_start_servers: 5
 php_fpm_pm_min_spare_servers: 5
 php_fpm_pm_max_spare_servers: 5
 php_fpm_pm_max_requests: 500
+php_fpm_catch_workers_output: "no"
 
 # -----------------------------------------------------------------------------
 # 40-apcu.ini
