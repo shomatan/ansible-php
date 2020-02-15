@@ -107,7 +107,7 @@ cli_server.color = On
 date.timezone = {{ php_date_timezone }}
 
 [Pdo_mysql]
-pdo_mysql.cache_size = 2000
+pdo_mysql.cache_size = {{ php_pdo_mysql_cache_size }}
 pdo_mysql.default_socket=
 
 [mail function]
@@ -134,7 +134,7 @@ odbc.defaultbinmode = 1
 [MySQL]
 mysql.allow_local_infile = On
 mysql.allow_persistent = On
-mysql.cache_size = 2000
+mysql.cache_size = {{ php_mysql_cache_size }}
 mysql.max_persistent = -1
 mysql.max_links = -1
 mysql.default_port =

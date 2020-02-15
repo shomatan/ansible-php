@@ -70,6 +70,8 @@ php_session_cookie_lifetime: 0
 php_session_gc_probability: 1
 php_session_gc_divisor: 1000
 php_session_gc_maxlifetime: 1440
+php_pdo_mysql_cache_size: 2000
+php_mysql_cache_size: 2000
 
 # -----------------------------------------------------------------------------
 # www.conf
@@ -96,6 +98,8 @@ php_fpm_request_terminate_timeout: 0
 php_apc_enable_cli: 1
 php_apc_shm_size: 64M
 php_apc_entries_hint: 4096
+php_apc_ttl: 0
+php_apc_gc_ttl: 3600
 
 # -----------------------------------------------------------------------------
 # 10-opcache.ini

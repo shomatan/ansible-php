@@ -22,11 +22,11 @@ apc.shm_size={{ php_apc_shm_size }}
 
 ;      	The number of seconds a cache entry is allowed to idle in a slot in case
 ;      	this cache entry slot is needed by another entry.
-;apc.ttl=0
+apc.ttl={{ php_apc_ttl }}
 
 ;      	The number of seconds that a cache entry may remain on the
 ;      	garbage-collection list.
-;apc.gc_ttl=3600
+apc.gc_ttl={{ php_apc_gc_ttl }}
 
 ;      	If you begin to get low on resources, an expunge of the cache
 ;      	is performed if it is less than half full. This is not always
